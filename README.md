@@ -20,6 +20,7 @@ g = Nifcloud::Uri.generator(endpoint: 'https://west-1.cp.cloud.nifty.com/api/', 
 uri = g.Action('DescribeInstances')
 p uri
 ```
+
 パラメタ(InstanceId=test)とかつけたい場合はこんなかんじ。自由につけれる。
 ```
 require 'nifcloud/uri'
@@ -32,6 +33,12 @@ end
 
 uri = Nifcloud::Uri.Action('DescribeInstanceAttribute', InstanceId: 'test')
 p uri
+```
+
+secret_keyとかaccess_keyは、環境変数として設定もできる。
+```
+$ export NIFCLOUD_ACCESS_KEY_ID=XXXXXXXXXXXXXXXXXX
+$ export NIFCLOUD_SECRET_ACCESS_KEY=YYYYYYYYYYYYYYYYYYY
 ```
 
 ## その他
