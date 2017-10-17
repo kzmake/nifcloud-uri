@@ -12,7 +12,7 @@ gem install nifcloud-uri
 ## つかいかた
 
 こんなかんじで生成。
-```
+```ruby
 require 'nifcloud/uri'
 
 g = Nifcloud::Uri.generator(endpoint: 'https://west-1.cp.cloud.nifty.com/api/', secret_key: 'XXXXXX', access_key: 'YYYYYY')
@@ -22,7 +22,7 @@ p uri
 ```
 
 パラメタ(InstanceId=test)とかつけたい場合はこんなかんじ。自由につけれる。
-```
+```ruby
 require 'nifcloud/uri'
 
 Nifcloud::Uri.configure do |config|
