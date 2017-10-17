@@ -1,36 +1,49 @@
-# Nifcloud::Uri
+# N i f c l o u d - U r i
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/nifcloud/uri`. To experiment with that code, run `bin/console` for an interactive prompt.
+ニフクラのIaaS APIのURIちょちょいっと作りたかったのでとりあえずつくってみたgem。
 
-TODO: Delete this and the text above, and describe your gem
+## いんすとーる
 
-## Installation
+```
+gem install nifcloud-uri
+```
+でぽんっ。
 
-Add this line to your application's Gemfile:
+## つかいかた
 
-```ruby
-gem 'nifcloud-uri'
+こんなかんじで生成。
+```
+require 'nifcloud/uri'
+
+g = Nifcloud::Uri.generator(endpoint: 'https://west-1.cp.cloud.nifty.com/api/', secret_key: 'XXXXXX', access_key: 'YYYYYY')
+
+uri = g.Action('DescribeInstances')
+p uri
 ```
 
-And then execute:
+パラメタ(InstanceId=test)とかつけたい場合はこんなかんじ。自由につけれる。
+```
+require 'nifcloud/uri'
 
-    $ bundle
+Nifcloud::Uri.configure do |config|
+  config.endpoint = 'https://west-1.cp.cloud.nifty.com/api/'
+  config.secret_key = 'XXXXXXXXXXX'
+  config.access_key = 'YYYYYYYYYYY'
+end
 
-Or install it yourself as:
+uri = Nifcloud::Uri.Action('DescribeInstanceAttribute', InstanceId: 'test')
+p uri
+```
 
-    $ gem install nifcloud-uri
+secret_keyとかaccess_keyは、環境変数として設定もできる。
+```
+$ export NIFCLOUD_ACCESS_KEY_ID=XXXXXXXXXXXXXXXXXX
+$ export NIFCLOUD_SECRET_ACCESS_KEY=YYYYYYYYYYYYYYYYYYY
+```
 
-## Usage
-
-TODO: Write usage instructions here
-
-## Development
-
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+## その他
+(自分のために作ったもの。放置するとおもう。)
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/nifcloud-uri.
-# nifcloud-uri
+Bug reports and pull requests are welcome on GitHub at https://github.com/kzmake/nifcloud-uri.
